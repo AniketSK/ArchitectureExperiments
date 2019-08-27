@@ -5,8 +5,10 @@ import com.aniketkadam.temperatureapp.MainActivity
 import com.aniketkadam.temperatureapp.temperaturedisplay.TemperatureDisplayRepository
 import com.aniketkadam.temperatureapp.temperaturedisplay.TemperatureFragmentFactory
 import com.aniketkadam.temperatureapp.temperaturedisplay.TemperatureVm
+import com.aniketkadam.temperatureapp.temperaturedisplay.data.WeatherApi
 import dagger.Module
 import dagger.Provides
+import retrofit2.Retrofit
 import javax.inject.Named
 
 const val MAIN_VM = "MAIN_VM"
@@ -28,4 +30,7 @@ class MainActivityModule {
     @Provides
     fun getTemperatureVmFactory(repository: TemperatureDisplayRepository) =
         TemperatureFragmentFactory(repository)
+
+    @Provides
+    fun getWeatherApi(retrofit: Retrofit) = retrofit.create(WeatherApi::class.java)
 }
