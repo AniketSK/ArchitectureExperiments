@@ -23,6 +23,6 @@ class IpLocationDataTest {
             getTextInFile("api_response_for_ip_location.json"),
             IpLocationData::class.java
         )
-        assertThat(expected, equalTo(result))
+        assertThat(result, equalTo(expected))
     }
 }
