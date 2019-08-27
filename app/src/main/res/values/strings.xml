@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TemperatureApp</string>
+    <string name="degreesFormatting">%1$f°</string>
 </resources>
