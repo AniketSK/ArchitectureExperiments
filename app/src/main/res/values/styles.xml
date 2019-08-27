@@ -7,5 +7,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="temperature_list_item_text_style">
+        <item name="android:textColor">@color/temperature_day_item_color</item>
+        <item name="android:textSize">@dimen/temperature_day_item_size</item>
+    </style>
 
 </resources>

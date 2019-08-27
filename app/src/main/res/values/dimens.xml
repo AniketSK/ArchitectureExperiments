@@ -2,4 +2,5 @@
 <resources>
     <dimen name="currentTemperatureSize">96sp</dimen>
     <dimen name="currentCitySize">36sp</dimen>
+    <dimen name="temperature_day_item_size">16sp</dimen>
 </resources>

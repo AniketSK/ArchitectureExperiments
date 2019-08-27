@@ -12,7 +12,8 @@
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintBottom_toBottomOf="parent"
-              android:id="@+id/day" tools:text="Monday"/>
+              android:id="@+id/day" tools:text="Monday" style="@style/temperature_list_item_text_style"
+    />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:id="@+id/temperature"
               app:layout_constraintTop_toTopOf="parent"
