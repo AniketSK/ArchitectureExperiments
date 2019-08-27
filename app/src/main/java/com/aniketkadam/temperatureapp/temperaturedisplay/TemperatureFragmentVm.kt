@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.aniketkadam.temperatureapp.temperaturedisplay.data.WeatherAtLocation
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class TemperatureFragmentVm(repository: TemperatureDisplayRepository) : ViewModel() {
+class TemperatureFragmentVm @Inject constructor(repository: TemperatureDisplayRepository) :
+    ViewModel() {
 
     private val disposable = CompositeDisposable()
     private val _currentWeather = MutableLiveData<LceWeather>()
