@@ -19,5 +19,6 @@
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
+              style="@style/temperature_list_item_text_style"
               tools:text="24 C"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
