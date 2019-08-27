@@ -5,6 +5,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+def credentialFile = rootProject.file("credentials.properties")
+def credentialProperty = new Properties()
+if (credentialFile.exists()) { // If someone just cloned the repo, they wouldn't have the credentials file but don't really need it.
+    credentialProperty.load(new FileInputStream(credentialFile))
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -14,6 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', "WEATHER_API_KEY", credentialProperty.get('weather_api_key')
     }
     buildTypes {
         release {
