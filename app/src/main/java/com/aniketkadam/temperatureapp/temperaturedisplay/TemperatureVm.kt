@@ -8,7 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class TemperatureFragmentVm @Inject constructor(repository: TemperatureDisplayRepository) :
+class TemperatureVm @Inject constructor(repository: TemperatureDisplayRepository) :
     ViewModel() {
 
     private val disposable = CompositeDisposable()

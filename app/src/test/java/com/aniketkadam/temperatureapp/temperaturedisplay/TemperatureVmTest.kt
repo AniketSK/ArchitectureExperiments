@@ -16,7 +16,7 @@ import org.junit.Rule
 import org.junit.Test
 import java.net.SocketTimeoutException
 
-class TemperatureFragmentVmTest {
+class TemperatureVmTest {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -36,7 +36,7 @@ class TemperatureFragmentVmTest {
     @Test
     fun `when the vm is loaded, it retrieves the current weather`() {
 
-        val vm = TemperatureFragmentVm(repository)
+        val vm = TemperatureVm(repository)
 
         verify(exactly = 1) { repository.getCurrentWeather() }
 
@@ -59,7 +59,7 @@ class TemperatureFragmentVmTest {
         val repository = mockk<TemperatureDisplayRepository> {
             every { getCurrentWeather() } returns Observable.error(SocketTimeoutException("read timed out"))
         }
-        val vm = TemperatureFragmentVm(repository)
+        val vm = TemperatureVm(repository)
 
         assertThat(vm.currentWeather.value, instanceOf(LceWeather.Error::class.java))
     }
@@ -69,7 +69,7 @@ class TemperatureFragmentVmTest {
         val repository = mockk<TemperatureDisplayRepository> {
             every { getCurrentWeather() } returns Observable.empty()
         }
-        val vm = TemperatureFragmentVm(repository)
+        val vm = TemperatureVm(repository)
         vm.currentWeather.test().awaitValue().assertValue(LceWeather.Loading)
     }
 
