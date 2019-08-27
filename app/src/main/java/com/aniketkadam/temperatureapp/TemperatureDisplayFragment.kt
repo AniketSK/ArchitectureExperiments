@@ -4,9 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.aniketkadam.temperatureapp.di.FRAGMENT_VM
+import com.aniketkadam.temperatureapp.temperaturedisplay.TemperatureVm
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
+import javax.inject.Named
 
-class TemperatureDisplayFragment : Fragment() {
+class TemperatureDisplayFragment : DaggerFragment() {
+
+    @field:Named(FRAGMENT_VM)
+    @Inject
+    lateinit var temperatureVm: TemperatureVm
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
