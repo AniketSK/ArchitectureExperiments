@@ -129,4 +129,5 @@ dependencies {
     testImplementation mockk.lib
     androidTestImplementation mockk.android
 
+    testImplementation livedataCommunityTestHelper.lib
 }

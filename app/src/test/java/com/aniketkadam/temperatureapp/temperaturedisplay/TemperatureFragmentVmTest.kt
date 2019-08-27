@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.aniketkadam.temperatureapp.temperaturedisplay.data.Temperature
 import com.aniketkadam.temperatureapp.temperaturedisplay.data.WeatherAtLocation
 import com.aniketkadam.temperatureapp.temperaturedisplay.data.WeatherLocation
+import com.jraska.livedata.test
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -62,4 +63,14 @@ class TemperatureFragmentVmTest {
 
         assertThat(vm.currentWeather.value, instanceOf(LceWeather.Error::class.java))
     }
+
+    @Test
+    fun `loading is shown until an item is emitted from the repository`() {
+        val repository = mockk<TemperatureDisplayRepository> {
+            every { getCurrentWeather() } returns Observable.empty()
+        }
+        val vm = TemperatureFragmentVm(repository)
+        vm.currentWeather.test().awaitValue().assertValue(LceWeather.Loading)
+    }
+
 }
