@@ -26,6 +26,7 @@ class MainActivity : DaggerAppCompatActivity() {
     private fun switchScreen(lceWeather: LceWeather) = with(findNavController(R.id.nav_host)) {
         when (lceWeather) {
             is LceWeather.Success -> navigate(LoadingFragmentDirections.actionLoadingFragmentToTemperatureDisplayFragment())
+            is LceWeather.Error -> navigate(LoadingFragmentDirections.actionLoadingFragmentToErrorDisplayFragment())
         }
     }
 }
