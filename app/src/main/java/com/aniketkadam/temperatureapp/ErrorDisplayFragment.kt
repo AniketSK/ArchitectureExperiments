@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.aniketkadam.temperatureapp.databinding.FragmentErrorDisplayBinding
+import com.aniketkadam.temperatureapp.di.FRAGMENT_VM
 import com.aniketkadam.temperatureapp.temperaturedisplay.TemperatureVm
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import javax.inject.Named
 
 class ErrorDisplayFragment : DaggerFragment() {
-    @field:Named
+
+    @field:Named(FRAGMENT_VM)
     @Inject
     lateinit var vm: TemperatureVm
 
