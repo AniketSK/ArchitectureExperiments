@@ -73,4 +73,10 @@ class TemperatureVmTest {
         vm.currentWeather.test().awaitValue().assertValue(LceWeather.Loading)
     }
 
+    @Test
+    fun `when the weather is retried, it loads again`() {
+        val vm = TemperatureVm(repository)
+        vm.retry()
+        verify(exactly = 2) { repository.getCurrentWeather() }
+    }
 }
