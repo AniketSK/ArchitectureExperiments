@@ -12,6 +12,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
@@ -29,6 +30,10 @@ class MainActivityTest {
 
     @Test
     fun loading_is_shown_when_the_app_launches() {
+        RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("ip.json"))
+            .delay(TimeUnit.SECONDS, 5)
+            .thenReturnFile(200, "mocks/api_response_for_ip_location.json")
+
         activityTestRule.launchActivity(null)
         onView(withContentDescription(R.string.loading_content_description)).check(
             matches(
@@ -56,7 +61,7 @@ class MainActivityTest {
             .thenReturnFile(200, "mocks/api_response_for_current.json")
 
         activityTestRule.launchActivity(null)
-        onView(withText(" 30°")).check(matches(isDisplayed()))
+        onView(withText("30°")).check(matches(isDisplayed()))
     }
 
     @Test
