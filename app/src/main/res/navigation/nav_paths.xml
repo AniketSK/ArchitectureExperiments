@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_paths" app:startDestination="@id/temperatureDisplayFragment">
+        android:id="@+id/nav_paths"
+        app:startDestination="@id/loadingFragment">
 
     <fragment android:id="@+id/temperatureDisplayFragment"
               android:name="com.aniketkadam.temperatureapp.TemperatureDisplayFragment"
               android:label="TemperatureDisplayFragment"/>
+    <fragment
+            android:id="@+id/loadingFragment"
+            android:name="com.aniketkadam.temperatureapp.loading.LoadingFragment"
+            android:label="LoadingFragment" />
 </navigation>
