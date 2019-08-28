@@ -3,6 +3,7 @@ package com.aniketkadam.temperatureapp
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -89,4 +90,25 @@ class MainActivityTest {
         onView(withId(R.id.errorText)).check(matches(isDisplayed()))
     }
 
+
+    @Test
+    fun when_retry_is_clicked_it_goes_back_to_loading() {
+        RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("ip.json"))
+            .thenReturnEmpty(400)
+        activityTestRule.launchActivity(null)
+        onView(withId(R.id.errorText)).check(matches(isDisplayed()))
+        RESTMockServer.reset()
+
+        IdlingRegistry.getInstance().unregister(httpIdlingResource)
+        RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("ip.json"))
+            .delay(TimeUnit.SECONDS, 2000)
+            .thenReturnEmpty(400)
+
+        onView(withId(R.id.retryButton)).perform(ViewActions.click())
+        onView(withContentDescription(R.string.loading_content_description)).check(
+            matches(
+                isDisplayed()
+            )
+        )
+    }
 }
