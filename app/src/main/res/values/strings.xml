@@ -2,4 +2,6 @@
     <string name="app_name">TemperatureApp</string>
     <string name="degreesFormatting">%1$.0f°</string>
     <string name="loading_content_description">Loading</string>
+    <string name="error_text">Something went wrong at our end!</string>
+    <string name="retry">retry</string>
 </resources>

@@ -6,4 +6,7 @@
     <color name="currentTemperatureColor">#2A2A2A</color>
     <color name="currentCityColour">#556799</color>
     <color name="temperature_day_item_color">#2A2A2A</color>
+    <color name="error_background">#E85959</color>
+    <color name="error_text_colour">#FFFFFF</color>
+    <color name="error_retry_button_colour">#4A4A4A</color>
 </resources>

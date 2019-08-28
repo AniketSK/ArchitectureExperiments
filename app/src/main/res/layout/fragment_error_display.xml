@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ErrorDisplayFragment">
 
     <data>
 
@@ -8,9 +10,32 @@
                 type="com.aniketkadam.temperatureapp.temperaturedisplay.TemperatureVm" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/error_background"
+            android:gravity="center"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp">
 
-    </LinearLayout>
+        <TextView
+                android:id="@+id/errorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-thin"
+                android:text="@string/error_text"
+                android:textColor="@color/error_text_colour"
+                android:textSize="54sp" />
+
+        <Button
+                android:id="@+id/retryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/errorText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="44dp"
+                android:background="@color/error_retry_button_colour"
+                android:text="@string/retry" />
+
+    </RelativeLayout>
 </layout>
