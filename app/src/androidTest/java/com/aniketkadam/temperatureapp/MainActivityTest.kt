@@ -58,4 +58,13 @@ class MainActivityTest {
         activityTestRule.launchActivity(null)
         onView(withText(" 30°")).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun on_error_the_error_screen_is_shown() {
+        RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("ip.json"))
+            .thenReturnEmpty(400)
+
+        activityTestRule.launchActivity(null)
+        onView(withId(R.id.errorText)).check(matches(isDisplayed()))
+    }
 }
