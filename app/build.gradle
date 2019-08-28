@@ -55,15 +55,12 @@ dependencies {
     androidTestImplementation adxTestLib.espresso
     androidTestImplementation adxTestLib.espressoContrib
     androidTestImplementation lifecycle.testhelper
-    androidTestImplementation room.test
 
     // Robolectric and everything it needs for its hybrid unit+instrumentation tests
-    testImplementation robolectric.lib
     testImplementation adxTestLib.runner
     testImplementation adxTestLib.core
     androidTestImplementation adxTestLib.core
     testImplementation lifecycle.testhelper
-    testImplementation room.test
 
     // Rxjava
     implementation rxjava.lib
@@ -90,14 +87,6 @@ dependencies {
     implementation okhttp.lib
     implementation okhttp.interceptor
 
-    // Databases
-    // Room
-    implementation room.lib
-    kapt room.compiler
-    kaptAndroidTest room.compiler
-    implementation room.extensions
-    implementation room.rxjava
-
     testImplementation mockito.lib
     testImplementation mockito.android
     androidTestImplementation mockito.android
@@ -111,13 +100,6 @@ dependencies {
     implementation lifecycle.extensions
     kapt lifecycle.kotlinCompiler
     implementation lifecycle.reactivestreams
-
-    // Daggermock when used with androidTest, requires the dexOpener to make the classes mockable.
-    // mock-maker-inline only works for test, not androidTest. So dexopener and it's instrumentation runner
-    // is really required.
-    androidTestImplementation daggerMock.lib
-    androidTestImplementation daggerMock.kotlin
-    androidTestImplementation dexOpener.lib
 
     testImplementation mockito.inline
 
