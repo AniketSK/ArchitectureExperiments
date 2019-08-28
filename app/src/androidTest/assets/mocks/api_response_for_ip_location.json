@@ -1,0 +1,17 @@
+{
+  "ip": "2402:3a80:6a6:6880:1d32:d70b:5316:5b0b",
+  "type": "ipv6",
+  "continent_code": "AS",
+  "continent_name": "Asia",
+  "country_code": "IN",
+  "country_name": "India",
+  "is_eu": "false",
+  "geoname_id": 1275339,
+  "city": "Mumbai",
+  "region": "",
+  "lat": 18.9721,
+  "lon": 72.8246,
+  "tz_id": "Asia/Kolkata",
+  "localtime_epoch": 1566907433,
+  "localtime": "2019-08-27 17:33"
+}
