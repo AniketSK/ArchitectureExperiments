@@ -9,12 +9,15 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import io.reactivex.Observable
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.TestScheduler
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.hamcrest.Matchers.instanceOf
 import org.junit.Rule
 import org.junit.Test
 import java.net.SocketTimeoutException
+import java.util.concurrent.TimeUnit
 
 class TemperatureVmTest {
 
@@ -78,5 +81,20 @@ class TemperatureVmTest {
         val vm = TemperatureVm(repository)
         vm.retry()
         verify(exactly = 2) { repository.getCurrentWeather() }
+    }
+
+    @Test
+    fun `if a load request is active, do not try to initiate another one`() {
+        val scheduler = TestScheduler()
+        RxJavaPlugins.setIoSchedulerHandler { scheduler }
+        val vm = TemperatureVm(repository)
+        val loadStates = vm.currentWeather.test()
+        loadStates.assertHistorySize(1).assertValue(LceWeather.Loading)
+        vm.retry()
+        loadStates.assertHistorySize(1).assertValue(LceWeather.Loading)
+        scheduler.advanceTimeBy(5, TimeUnit.SECONDS)
+        loadStates.assertHistorySize(2).assertValue { it is LceWeather.Success }
+        verify(exactly = 1) { repository.getCurrentWeather() }
+        RxJavaPlugins.reset()
     }
 }
