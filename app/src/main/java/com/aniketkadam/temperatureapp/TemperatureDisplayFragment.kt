@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import com.aniketkadam.temperatureapp.databinding.FragmentTemperatureDisplayBinding
 import com.aniketkadam.temperatureapp.di.FRAGMENT_VM
 import com.aniketkadam.temperatureapp.temperaturedisplay.TemperatureVm
 import dagger.android.support.DaggerFragment
@@ -20,7 +22,16 @@ class TemperatureDisplayFragment : DaggerFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_temperature_display, container, false)
+        val binding: FragmentTemperatureDisplayBinding =
+            DataBindingUtil.inflate<FragmentTemperatureDisplayBinding>(
+                inflater,
+                R.layout.fragment_temperature_display,
+                container,
+                false
+            )
+        binding.vm = temperatureVm
+        binding.lifecycleOwner = this
+        return binding.root
     }
 
 }
