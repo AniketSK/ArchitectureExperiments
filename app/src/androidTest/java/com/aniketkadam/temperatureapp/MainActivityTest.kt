@@ -5,7 +5,6 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.utils.RequestMatchers.pathEndsWithIgnoringQueryParams
@@ -57,8 +56,6 @@ class MainActivityTest {
             .thenReturnFile(200, "mocks/api_response_for_current.json")
 
         activityTestRule.launchActivity(null)
-        val formattedTemperature = InstrumentationRegistry.getInstrumentation()
-            .context.resources.getString(R.string.degreesFormatting, 30f)
-        onView(withText(formattedTemperature)).check(matches(isDisplayed()))
+        onView(withText(" 30°")).check(matches(isDisplayed()))
     }
 }
