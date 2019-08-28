@@ -34,6 +34,7 @@
                 android:layout_below="@id/errorText"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="44dp"
+                android:onClick="@{() -> vm.retry()}"
                 android:background="@color/error_retry_button_colour"
                 android:text="@string/retry" />
 

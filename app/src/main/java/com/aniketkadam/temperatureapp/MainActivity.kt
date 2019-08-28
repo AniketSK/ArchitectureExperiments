@@ -27,6 +27,9 @@ class MainActivity : DaggerAppCompatActivity() {
         when (lceWeather) {
             is LceWeather.Success -> navigate(LoadingFragmentDirections.actionLoadingFragmentToTemperatureDisplayFragment())
             is LceWeather.Error -> navigate(LoadingFragmentDirections.actionLoadingFragmentToErrorDisplayFragment())
+            // Assuming you can only navigate back to loading from the error display fragment
+            is LceWeather.Loading -> navigate(ErrorDisplayFragmentDirections.actionErrorDisplayFragmentToLoadingFragment())
         }
     }
+
 }
