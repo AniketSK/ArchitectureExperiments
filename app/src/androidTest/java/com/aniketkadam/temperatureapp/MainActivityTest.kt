@@ -2,8 +2,7 @@ package com.aniketkadam.temperatureapp
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import org.junit.Rule
@@ -23,5 +22,10 @@ class MainActivityTest {
                 isDisplayed()
             )
         )
+    }
+
+    @Test
+    fun on_success_after_loading_the_temperature_is_shown() {
+        onView(withText("Mumbai")).check(matches(isDisplayed()))
     }
 }
