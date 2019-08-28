@@ -2,12 +2,16 @@ package com.aniketkadam.temperatureapp
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import com.jakewharton.espresso.OkHttp3IdlingResource
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.utils.RequestMatchers.pathEndsWithIgnoringQueryParams
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -23,13 +27,25 @@ class MainActivityTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    private var httpIdlingResource: OkHttp3IdlingResource? = null
+
     @Before
     fun setup() {
         RESTMockServer.reset()
+        httpIdlingResource =
+            (InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as TestApplication).appInjector.provideOkHttp()
+                .let { (OkHttp3IdlingResource.create("OkHttp", it)) }
+        IdlingRegistry.getInstance().register(httpIdlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(httpIdlingResource)
     }
 
     @Test
     fun loading_is_shown_when_the_app_launches() {
+
         RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("ip.json"))
             .delay(TimeUnit.SECONDS, 5)
             .thenReturnFile(200, "mocks/api_response_for_ip_location.json")
@@ -72,4 +88,5 @@ class MainActivityTest {
         activityTestRule.launchActivity(null)
         onView(withId(R.id.errorText)).check(matches(isDisplayed()))
     }
+
 }

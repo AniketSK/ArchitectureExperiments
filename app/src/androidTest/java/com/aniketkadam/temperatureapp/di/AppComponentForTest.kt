@@ -6,6 +6,7 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import dagger.android.support.DaggerApplication
+import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
 @Singleton
@@ -20,9 +21,11 @@ import javax.inject.Singleton
 interface AppComponentForTest : AndroidInjector<DaggerApplication> {
 
     override fun inject(instance: DaggerApplication)
+    fun provideOkHttp(): OkHttpClient
 
     @Component.Builder
     interface Builder {
+
 
         @BindsInstance
         fun application(application: Application): Builder

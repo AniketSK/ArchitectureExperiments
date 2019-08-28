@@ -125,4 +125,6 @@ dependencies {
     androidTestImplementation restMockServer.lib
 
     androidTestImplementation multidex.lib
+
+    androidTestImplementation externalIdlingResources.okhttp
 }
