@@ -5,10 +5,12 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import com.aniketkadam.temperatureapp.temperaturedisplay.futureforecast.ForecastDayViewHolder
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.utils.RequestMatchers.pathEndsWithIgnoringQueryParams
@@ -114,6 +116,31 @@ class MainActivityTest {
         onView(withContentDescription(R.string.loading_content_description)).check(
             matches(
                 isDisplayed()
+            )
+        )
+    }
+
+    @Test
+    fun the_list_of_forecasts_shows_correctly() {
+        RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("ip.json"))
+            .thenReturnFile(200, "mocks/api_response_for_ip_location.json")
+        RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("forecast.json"))
+            .thenReturnFile(200, "mocks/api_response_for_4_day_forecast.json")
+
+        activityTestRule.launchActivity(null)
+        waitForDeserializationDelay()
+
+        onView(withId(R.id.upcomingTemperaturesRecyclerView)).perform(
+            actionOnItem<ForecastDayViewHolder>(
+                hasDescendant(withText("28.3 C")),
+                ViewActions.scrollTo()
+            )
+        )
+
+        onView(withId(R.id.upcomingTemperaturesRecyclerView)).perform(
+            actionOnItem<ForecastDayViewHolder>(
+                hasDescendant(withText("28 C")),
+                ViewActions.scrollTo()
             )
         )
     }
