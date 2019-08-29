@@ -20,16 +20,15 @@ class ForecastApiResponseTest {
     fun `forecast api reponse serializes correctly`() {
 
         val expectedResponse = ForecastApiResponse(
-            WeatherLocation("Mumbai"), Temperature(29f),
-            ForecastData(
-                listOf(
-                    ForecastDay("2019-08-28", Temperature(28.3f)),
-                    ForecastDay("2019-08-29", Temperature(28.2f)),
-                    ForecastDay("2019-08-30", Temperature(28.1f)),
-                    ForecastDay("2019-08-31", Temperature(28f))
-                )
+            "Mumbai", 29f,
+            listOf(
+                ForecastDay("2019-08-28", 28.3f),
+                ForecastDay("2019-08-29", 28.2f),
+                ForecastDay("2019-08-30", 28.1f),
+                ForecastDay("2019-08-31", 28f)
             )
         )
+
 
         val serializedReponse = gson.fromJson(
             getTextInFile("api_response_for_4_day_forecast.json"),
@@ -37,4 +36,5 @@ class ForecastApiResponseTest {
         )
         assertThat(serializedReponse, equalTo(expectedResponse))
     }
+
 }

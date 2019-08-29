@@ -1,8 +1,10 @@
 package com.aniketkadam.temperatureapp.temperaturedisplay.data
 
-import com.google.gson.annotations.SerializedName
+import com.aniketkadam.temperatureapp.temperaturedisplay.network.ForecastDayDeserializer
+import com.google.gson.annotations.JsonAdapter
 
+@JsonAdapter(ForecastDayDeserializer::class)
 data class ForecastDay(
-    @field:SerializedName("date") val date: String,
-    @field:SerializedName("day") val temperature: Temperature
+    val date: String,
+    val temperature: Float
 )

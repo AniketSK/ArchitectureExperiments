@@ -1,9 +1,11 @@
 package com.aniketkadam.temperatureapp.temperaturedisplay.data
 
-import com.google.gson.annotations.SerializedName
+import com.aniketkadam.temperatureapp.temperaturedisplay.network.ForecastApiResponseDeserializer
+import com.google.gson.annotations.JsonAdapter
 
+@JsonAdapter(ForecastApiResponseDeserializer::class)
 data class ForecastApiResponse(
-    @field:SerializedName("location") val location: WeatherLocation,
-    @field:SerializedName("current") val temperature: Temperature,
-    @field:SerializedName("forecast") val forecastData: ForecastData
+    val currentCity: String,
+    val currentTemp: Float,
+    val forecastDay: List<ForecastDay>?
 )
