@@ -97,4 +97,33 @@ class TemperatureVmTest {
         verify(exactly = 1) { repository.getCurrentWeather() }
         RxJavaPlugins.reset()
     }
+
+    @Test
+    fun `weather state has doesn't add zeros to a number that doesn't need them`() {
+        every { repository.getCurrentWeather() } returns Observable.just(
+            ForecastApiResponse(
+                "Mumbai",
+                30f,
+                null
+            )
+        )
+
+        val vm = TemperatureVm(repository)
+        vm.currentWeatherState.test().awaitValue().assertValue { it?.temp == "30" }
+    }
+
+    @Test
+    fun `weather state shows the correct decimal points when received from the api`() {
+        every { repository.getCurrentWeather() } returns Observable.just(
+            ForecastApiResponse(
+                "Mumbai",
+                30.1f,
+                null
+            )
+        )
+
+        val vm = TemperatureVm(repository)
+        vm.currentWeatherState.test().awaitValue().assertValue { it?.temp == "30.1" }
+    }
+
 }
