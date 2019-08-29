@@ -7,7 +7,7 @@ import org.junit.Test
 class FormattedForecastDayTest {
 
     @Test
-    fun `thee day of week from forecast is correctly formatted`() {
+    fun `the day of week from forecast is correctly formatted`() {
         val sampleForecast = ForecastDay("2019-08-12", 21f)
         val underTest = FormattedForecastDay(sampleForecast)
 
