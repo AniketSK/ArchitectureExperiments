@@ -1,9 +1,7 @@
 package com.aniketkadam.temperatureapp.temperaturedisplay
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.aniketkadam.temperatureapp.temperaturedisplay.data.Temperature
-import com.aniketkadam.temperatureapp.temperaturedisplay.data.WeatherAtLocation
-import com.aniketkadam.temperatureapp.temperaturedisplay.data.WeatherLocation
+import com.aniketkadam.temperatureapp.temperaturedisplay.data.ForecastApiResponse
 import com.jraska.livedata.test
 import io.mockk.every
 import io.mockk.mockk
@@ -29,9 +27,10 @@ class TemperatureVmTest {
 
     val repository = mockk<TemperatureDisplayRepository> {
         every { getCurrentWeather() } returns Observable.just(
-            WeatherAtLocation(
-                WeatherLocation("Mumbai"),
-                Temperature(30f)
+            ForecastApiResponse(
+                "Mumbai",
+                30f,
+                null
             )
         )
     }
@@ -47,9 +46,10 @@ class TemperatureVmTest {
             vm.currentWeather.value,
             equalTo<LceWeather>(
                 LceWeather.Success(
-                    WeatherAtLocation(
-                        WeatherLocation("Mumbai"),
-                        Temperature(30f)
+                    ForecastApiResponse(
+                        "Mumbai",
+                        30f,
+                        null
                     )
                 )
             )

@@ -17,6 +17,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.lang.Thread.sleep
 import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
@@ -29,6 +30,10 @@ class MainActivityTest {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private var httpIdlingResource: OkHttp3IdlingResource? = null
+
+    private fun waitForDeserializationDelay() {
+        sleep(200) // While we have the oktthp idling, adding deserialization slowed it down enough to require delays or the tests involving it fail.
+    }
 
     @Before
     fun setup() {
@@ -63,10 +68,11 @@ class MainActivityTest {
     fun on_success_after_loading_the_city_is_shown() {
         RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("ip.json"))
             .thenReturnFile(200, "mocks/api_response_for_ip_location.json")
-        RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("current.json"))
-            .thenReturnFile(200, "mocks/api_response_for_current.json")
+        RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("forecast.json"))
+            .thenReturnFile(200, "mocks/api_response_for_4_day_forecast.json")
 
         activityTestRule.launchActivity(null)
+        waitForDeserializationDelay()
         onView(withText("Mumbai")).check(matches(isDisplayed()))
     }
 
@@ -74,11 +80,11 @@ class MainActivityTest {
     fun on_success_after_loading_the_temperature_is_shown() {
         RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("ip.json"))
             .thenReturnFile(200, "mocks/api_response_for_ip_location.json")
-        RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("current.json"))
-            .thenReturnFile(200, "mocks/api_response_for_current.json")
-
+        RESTMockServer.whenGET(pathEndsWithIgnoringQueryParams("forecast.json"))
+            .thenReturnFile(200, "mocks/api_response_for_4_day_forecast.json")
         activityTestRule.launchActivity(null)
-        onView(withText("30°")).check(matches(isDisplayed()))
+        waitForDeserializationDelay()
+        onView(withText("29°")).check(matches(isDisplayed()))
     }
 
     @Test

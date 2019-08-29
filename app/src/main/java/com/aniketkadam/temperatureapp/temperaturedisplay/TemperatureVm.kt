@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.aniketkadam.temperatureapp.temperaturedisplay.data.WeatherAtLocation
+import com.aniketkadam.temperatureapp.temperaturedisplay.data.ForecastApiResponse
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -39,8 +39,8 @@ class TemperatureVm @Inject constructor(private val repository: TemperatureDispl
     val currentWeatherState = Transformations.map(_currentWeather) {
         if (it is LceWeather.Success) {
             return@map CurrentWeatherState(
-                it.weatherAtLocation.temperature.celsius,
-                it.weatherAtLocation.location.name
+                it.forecast.currentTemp,
+                it.forecast.currentCity
             )
         } else null
     }
@@ -54,7 +54,7 @@ class TemperatureVm @Inject constructor(private val repository: TemperatureDispl
 }
 
 sealed class LceWeather {
-    data class Success(val weatherAtLocation: WeatherAtLocation) : LceWeather()
+    data class Success(val forecast: ForecastApiResponse) : LceWeather()
     data class Error(val e: Throwable) : LceWeather()
     object Loading : LceWeather()
 }
