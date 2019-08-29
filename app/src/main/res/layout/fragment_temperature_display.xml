@@ -45,8 +45,10 @@
                 tools:text="Bangalore" />
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/upcomingTemperaturesListView"
-                android:layout_width="wrap_content"
+                android:id="@+id/upcomingTemperaturesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
