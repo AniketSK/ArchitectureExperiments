@@ -14,10 +14,12 @@
             android:label="LoadingFragment">
         <action
                 android:id="@+id/action_loadingFragment_to_temperatureDisplayFragment"
-                app:destination="@id/temperatureDisplayFragment" />
+                app:destination="@id/temperatureDisplayFragment"
+                app:popUpTo="@id/nav_paths" />
         <action
                 android:id="@+id/action_loadingFragment_to_errorDisplayFragment"
-                app:destination="@id/errorDisplayFragment" />
+                app:destination="@id/errorDisplayFragment"
+                app:popUpTo="@id/nav_paths" />
     </fragment>
     <fragment
             android:id="@+id/errorDisplayFragment"
@@ -26,6 +28,7 @@
             tools:layout="@layout/fragment_error_display">
         <action
                 android:id="@+id/action_errorDisplayFragment_to_loadingFragment"
-                app:destination="@id/loadingFragment" />
+                app:destination="@id/loadingFragment"
+                app:popUpTo="@id/nav_paths" />
     </fragment>
 </navigation>
