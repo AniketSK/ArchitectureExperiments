@@ -86,7 +86,7 @@ class MainActivityTest {
             .thenReturnFile(200, "mocks/api_response_for_4_day_forecast.json")
         activityTestRule.launchActivity(null)
         waitForDeserializationDelay()
-        onView(withText("29°")).check(matches(isDisplayed()))
+        onView(withText("  29°")).check(matches(isDisplayed()))
     }
 
     @Test
