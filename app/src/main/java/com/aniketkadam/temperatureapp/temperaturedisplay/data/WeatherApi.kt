@@ -16,4 +16,10 @@ interface WeatherApi {
         @Query("key") key: String = BuildConfig.WEATHER_API_KEY
     ): Observable<WeatherAtLocation>
 
+    @GET("forecast.json")
+    fun getForecastForDays(
+        @Query("q") city: String,
+        @Query("days") days: Int,
+        @Query("key") key: String = BuildConfig.WEATHER_API_KEY
+    ): Observable<ForecastApiResponse>
 }
