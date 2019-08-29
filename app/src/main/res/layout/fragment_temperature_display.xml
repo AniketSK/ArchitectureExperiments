@@ -47,6 +47,7 @@
                 android:id="@+id/upcomingTemperaturesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:alpha="0"
                 android:layout_marginTop="62dp"
                 android:background="@android:color/white"
                 android:paddingLeft="16dp"

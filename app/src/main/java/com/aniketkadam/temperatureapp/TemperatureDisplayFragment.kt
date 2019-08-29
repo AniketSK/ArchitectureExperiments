@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -48,6 +49,7 @@ class TemperatureDisplayFragment : DaggerFragment() {
         temperatureVm.currentWeatherState.observe(
             viewLifecycleOwner,
             Observer { initAdapter(it?.daysForecast) })
+        slideUpForecasts()
     }
 
     private fun initRecyclerView() {
@@ -56,6 +58,16 @@ class TemperatureDisplayFragment : DaggerFragment() {
             LinearLayoutManager.VERTICAL
         )
         upcomingTemperaturesRecyclerView.addItemDecoration(mDividerItemDecoration)
+    }
+
+    private fun slideUpForecasts() {
+        upcomingTemperaturesRecyclerView.startAnimation(
+            AnimationUtils.loadAnimation(
+                context,
+                R.anim.translate_anim
+            )
+        )
+        upcomingTemperaturesRecyclerView.animate().alpha(1f).duration = 30
     }
 
     private fun initAdapter(daysForecast: List<FormattedForecastDay>?) {
