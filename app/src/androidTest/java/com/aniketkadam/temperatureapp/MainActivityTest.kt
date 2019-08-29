@@ -1,7 +1,7 @@
 package com.aniketkadam.temperatureapp
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -14,6 +14,7 @@ import com.aniketkadam.temperatureapp.temperaturedisplay.futureforecast.Forecast
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.utils.RequestMatchers.pathEndsWithIgnoringQueryParams
+import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -144,4 +145,28 @@ class MainActivityTest {
             )
         )
     }
+
+    @Test
+    fun cannot_navigate_back_from_error_to_loading_screen_by_pressing_back() {
+        when_retry_is_clicked_it_goes_back_to_loading()
+
+        pressBackUnconditionally()
+
+        assertThat(true, equalTo(activityTestRule.activity.isDestroyed))
+    }
+
+    @Test
+    fun pressing_back_after_success_closes_the_app() {
+        on_success_after_loading_the_temperature_is_shown()
+        pressBackUnconditionally()
+        assertThat(true, equalTo(activityTestRule.activity.isDestroyed))
+    }
+
+    @Test
+    fun pressing_back_after_going_to_loading_from_error_closes_the_app() {
+        when_retry_is_clicked_it_goes_back_to_loading()
+        pressBackUnconditionally()
+        assertThat(true, equalTo(activityTestRule.activity.isDestroyed))
+    }
+
 }
