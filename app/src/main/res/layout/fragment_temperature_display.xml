@@ -12,7 +12,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
+            android:background="@color/light_background_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -34,7 +34,6 @@
                 android:id="@+id/currentCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="62dp"
                 android:fontFamily="sans-serif-thin"
                 android:text="@{vm.currentWeatherState.city}"
                 android:textColor="@color/currentCityColour"
@@ -45,10 +44,12 @@
                 tools:text="Bangalore" />
 
         <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="62dp"
                 android:id="@+id/upcomingTemperaturesRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:background="@android:color/white"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"

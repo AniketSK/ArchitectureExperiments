@@ -9,4 +9,5 @@
     <color name="error_background">#E85959</color>
     <color name="error_text_colour">#FFFFFF</color>
     <color name="error_retry_button_colour">#4A4A4A</color>
+    <color name="light_background_color">#F5F6F7</color>
 </resources>
