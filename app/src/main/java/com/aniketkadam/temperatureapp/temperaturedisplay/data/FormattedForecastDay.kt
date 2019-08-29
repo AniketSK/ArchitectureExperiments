@@ -1,6 +1,7 @@
 package com.aniketkadam.temperatureapp.temperaturedisplay.data
 
 import android.annotation.SuppressLint
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
 
@@ -14,5 +15,5 @@ data class FormattedForecastDay(private val forecastDay: ForecastDay) {
     }
 
     val temp
-        get() = forecastDay.temperature
+        get() = DecimalFormat("0.#").format(forecastDay.temperature)
 }

@@ -8,6 +8,7 @@ import com.aniketkadam.temperatureapp.temperaturedisplay.data.ForecastApiRespons
 import com.aniketkadam.temperatureapp.temperaturedisplay.data.FormattedForecastDay
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 class TemperatureVm @Inject constructor(private val repository: TemperatureDisplayRepository) :
@@ -40,7 +41,7 @@ class TemperatureVm @Inject constructor(private val repository: TemperatureDispl
     val currentWeatherState = Transformations.map(_currentWeather) {
         if (it is LceWeather.Success) {
             return@map CurrentWeatherState(
-                it.forecast.currentTemp,
+                DecimalFormat("0.#").format(it.forecast.currentTemp),
                 it.forecast.currentCity,
                 it.forecast.forecastDay?.map { FormattedForecastDay(it) }
             )
@@ -62,7 +63,7 @@ sealed class LceWeather {
 }
 
 data class CurrentWeatherState(
-    val temp: Float,
+    val temp: String,
     val city: String,
     val daysForecast: List<FormattedForecastDay>?
 )
