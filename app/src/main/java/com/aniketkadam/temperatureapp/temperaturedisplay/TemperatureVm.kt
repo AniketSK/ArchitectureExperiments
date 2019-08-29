@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.aniketkadam.temperatureapp.temperaturedisplay.data.ForecastApiResponse
+import com.aniketkadam.temperatureapp.temperaturedisplay.data.FormattedForecastDay
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -40,7 +41,8 @@ class TemperatureVm @Inject constructor(private val repository: TemperatureDispl
         if (it is LceWeather.Success) {
             return@map CurrentWeatherState(
                 it.forecast.currentTemp,
-                it.forecast.currentCity
+                it.forecast.currentCity,
+                it.forecast.forecastDay?.map { FormattedForecastDay(it) }
             )
         } else null
     }
@@ -61,5 +63,6 @@ sealed class LceWeather {
 
 data class CurrentWeatherState(
     val temp: Float,
-    val city: String
+    val city: String,
+    val daysForecast: List<FormattedForecastDay>?
 )
