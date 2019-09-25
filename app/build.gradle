@@ -50,6 +50,7 @@ dependencies {
     implementation androidxDependencies.appCompat
     implementation ktxdep.lib
     implementation adxconstraintlayout.lib
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation testlib.junit
 
 

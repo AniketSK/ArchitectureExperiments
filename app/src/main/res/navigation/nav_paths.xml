@@ -31,4 +31,9 @@
                 app:destination="@id/loadingFragment"
                 app:popUpTo="@id/nav_paths" />
     </fragment>
+    <fragment
+            android:id="@+id/citiesListFragment"
+            android:name="com.aniketkadam.temperatureapp.CitiesListFragment"
+            android:label="fragment_cities_list"
+            tools:layout="@layout/fragment_cities_list" />
 </navigation>
