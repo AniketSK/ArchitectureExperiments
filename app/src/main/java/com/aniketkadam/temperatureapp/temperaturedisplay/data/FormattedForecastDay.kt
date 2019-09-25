@@ -14,6 +14,7 @@ data class FormattedForecastDay(private val forecastDay: ForecastDay) {
         formattedDay
     }
 
-    val temp
-        get() = DecimalFormat("0.#").format(forecastDay.temperature)
+    val temp by lazy {
+        TempratureFormatter().formattedTemperature(forecastDay.temperature)
+    }
 }
