@@ -10,4 +10,6 @@ class TemperatureDisplayRepository @Inject constructor(private val weatherApi: W
     fun getCurrentWeather(): Observable<ForecastApiResponse> =
         weatherApi.getIpLocation().switchMap { weatherApi.getForecastForDays(it.city, 4) }
 
+    fun getFavouriteCities(): List<String> = listOf("Mumbai", "Pune", "Bangalore", "Delhi")
+
 }
