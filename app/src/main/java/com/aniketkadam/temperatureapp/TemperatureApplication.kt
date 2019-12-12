@@ -7,7 +7,7 @@ import dagger.android.support.DaggerApplication
 class TemperatureApplication : DaggerApplication() {
 
     private val appInjector by lazy {
-        DaggerAppComponent.builder().application(this).build()
+        DaggerAppComponent.builder().create(this)
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> = appInjector
