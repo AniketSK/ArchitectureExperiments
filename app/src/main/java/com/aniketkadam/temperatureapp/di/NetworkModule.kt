@@ -8,9 +8,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+object NetworkModule {
 
     @Singleton
+    @JvmStatic
     @Provides
     fun provideRetrofit(): Retrofit = Retrofit.Builder().baseUrl("https://api.apixu.com/v1/")
         .addConverterFactory(GsonConverterFactory.create())
